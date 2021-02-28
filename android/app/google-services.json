@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "728847663570",
+    "project_id": "fethr-3c209",
+    "storage_bucket": "fethr-3c209.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:728847663570:android:35d4a85a133946a71bc80b",
+        "android_client_info": {
+          "package_name": "com.fethr.fethr"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "728847663570-s9h90gm5m0a5dee5jtmf2c3c1ma2hp8l.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCeRlfBUKpmhXkpzr48JsIABJakjBm9qi8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "728847663570-s9h90gm5m0a5dee5jtmf2c3c1ma2hp8l.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
