@@ -1,33 +1,18 @@
-import 'package:fethr/widgets/bottom_navigation_bar.dart';
+import 'package:fethr/screens/calendar_screen.dart';
+import 'package:fethr/statics/strings.dart' as str;
 import 'package:flutter/material.dart';
 
+enum TabItem { home, calendar, event, map }
+
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
-
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
-
-  final String title;
+  MyHomePage({Key key}) : super(key: key);
 
   @override
   _MyHomePageState createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _MyHomePageState extends State<MyHomePage> with AutomaticKeepAliveClientMixin {
   int _counter = 0;
-  List<Widget> _actionList = [
-    Image.asset(
-      'assets/ic_launcher_nobg.png',
-      height: 40,
-      width: 40,
-    ),
-  ];
 
   void _incrementCounter() {
     setState(() {
@@ -37,9 +22,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return Scaffold(
-      bottomNavigationBar: FethrBottomBar(),
-      appBar: AppBar(title: Text(widget.title), actions: _actionList),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -55,10 +39,29 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
+        onPressed: () => _incrementCounter(),
         tooltip: 'Increment',
         child: Icon(Icons.add),
       ),
     );
   }
+
+  @override
+  // TODO: implement wantKeepAlive
+  bool get wantKeepAlive => true;
 }
+
+// Center(
+//       child: Column(
+//         mainAxisAlignment: MainAxisAlignment.center,
+//         children: <Widget>[
+//           Text(
+//             'You have pushed the button this many times:',
+//           ),
+//           Text(
+//             '$_counter',
+//             style: Theme.of(context).textTheme.headline4,
+//           ),
+//         ],
+//       ),
+//     );
