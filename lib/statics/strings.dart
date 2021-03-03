@@ -9,3 +9,7 @@ const String MAP = "Map";
 // Route strings.
 const String ROUTE_HOME= '/';
 const String ROUTE_SIGNUP = '/signup';
+
+
+const String LOGIN_ACCOUNT = 'Login to your account';
+const String SIGNUP = "Sign up";
