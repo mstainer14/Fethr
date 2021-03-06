@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fethr/screens/calendar_screen.dart';
 import 'package:fethr/statics/strings.dart' as str;
 import 'package:flutter/material.dart';
@@ -11,12 +12,21 @@ class MyHomePage extends StatefulWidget {
   _MyHomePageState createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> with AutomaticKeepAliveClientMixin {
-  int _counter = 0;
+class _MyHomePageState extends State<MyHomePage>
+    with AutomaticKeepAliveClientMixin {
+  FirebaseFirestore firestore = FirebaseFirestore.instance;
 
-  void _incrementCounter() {
+  dynamic _counter;
+
+  void _incrementCounter() async {
+    DocumentSnapshot snapshot = await firestore
+        .collection('users')
+        .doc('a679QIDYnBhgOHjN1Gs27qJPQJ83')
+        .get();
+    print('Snapshoto ${snapshot.data()}');
     setState(() {
-      _counter++;
+      // _counter++;
+      _counter = snapshot.data().toString();
     });
   }
 
@@ -25,17 +35,19 @@ class _MyHomePageState extends State<MyHomePage> with AutomaticKeepAliveClientMi
     super.build(context);
     return Scaffold(
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-          ],
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Text(
+                'You have pushed the button this many times:',
+              ),
+              Text(
+                '$_counter',
+                style: Theme.of(context).textTheme.headline4,
+              ),
+            ],
+          ),
         ),
       ),
       floatingActionButton: FloatingActionButton(
