@@ -34,7 +34,7 @@ const List<String> ORIENTATIONS = [
   'Prefer not to say'
 ];
 
-const List<String> ETHNICITIES = [
+List<String> ethnicityList = [
   'White',
   'Mixed',
   'Asian / Asian British',
@@ -42,10 +42,10 @@ const List<String> ETHNICITIES = [
   'Arab',
   'Hispanic',
   'Prefer not to say',
-  'Other'
+  'Other',
 ];
 
-const List<String> POLITICAL_STANCE = [
+List<String> politicalStanceList = [
   'Liberal',
   'Moderate',
   'Conservative',
@@ -53,7 +53,7 @@ const List<String> POLITICAL_STANCE = [
   'Other'
 ];
 
-const List<String> RELIGIONS = [
+List<String> religionList = [
   'Buddhist',
   'Christian',
   'Hindu',
@@ -71,7 +71,7 @@ const List<String> MEET_PREFERENCES = [
   'Both',
 ];
 
-const List<String> VENUES = [
+List<String> venueList = [
   'Bar',
   'Restaurant',
   'Park',
@@ -89,7 +89,7 @@ const List<String> NUMBER_SCALE = [
   '5',
 ];
 
-const List<String> INTERESTS = [
+List<String> interestList = [
   'Music',
   'Reading & Writing',
   'Social Action',
@@ -113,7 +113,7 @@ const List<String> INTERESTS = [
   'Other',
 ];
 
-const List<String> ACTIVITIES = [
+List<String> activityList = [
   'Theatre / Musicals',
   'Live Gigs',
   'Art Galleries',
@@ -128,7 +128,7 @@ const List<String> ACTIVITIES = [
   'Other',
 ];
 
-const List<String> ACTIVITIES2 = [
+List<String> activityList2 = [
   'Dancing',
   'Yoga / Pilates',
   'High-Intensity Workouts',
@@ -143,7 +143,7 @@ const List<String> ACTIVITIES2 = [
   'Other',
 ];
 
-const List<String> TOPICS = [
+List<String> topicList = [
   'History',
   'Politics',
   'Current Affairs',
@@ -163,7 +163,7 @@ const List<String> TOPICS = [
   'Other',
 ];
 
-const List<String> GENRES = [
+List<String> genreList = [
   'Rock',
   'Musical Theatre',
   'Classical',
@@ -187,7 +187,21 @@ const List<String> GENDERS = [
   'Prefer not to say',
 ];
 
-const List<String> QUALITIES = [
+const List<String> qualitiesList = [
+  'Funny',
+  'Intelligent',
+  'Empathetic',
+  'Honest',
+  'Generous',
+  'Kind',
+  'Non-judgemental',
+  'Good listener',
+  'Self-confident',
+  'Spontaneous',
+  'Other',
+];
+
+const List<String> qualitiesList2 = [
   'Funny',
   'Intelligent',
   'Empathetic',

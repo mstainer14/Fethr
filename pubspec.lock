@@ -95,9 +95,11 @@ packages:
   custom_radio_grouped_button:
     dependency: "direct main"
     description:
-      name: custom_radio_grouped_button
-      url: "https://pub.dartlang.org"
-    source: hosted
+      path: "."
+      ref: HEAD
+      resolved-ref: af94762f821905ee73c00e245dd12b63515d9440
+      url: "https://github.com/mstainer14/custom_radio_grouped_button"
+    source: git
     version: "1.0.6+1"
   equatable:
     dependency: "direct main"

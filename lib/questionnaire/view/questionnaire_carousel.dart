@@ -201,8 +201,14 @@ class _FethrQuestionnaireState extends State<FethrQuestionnaire> {
                   _SingleChoiceSelection(
                     value: _ethnicity,
                     questionText: QUESTIONS[7],
-                    choices: ETHNICITIES,
+                    choices: ethnicityList,
                     function: (choice) => _ethnicity = choice,
+                    other: (other) {
+                      _ethnicity = other;
+                      setState(() {
+                        ethnicityList[ethnicityList.indexOf('Other')] = other;
+                      });
+                    },
                   ),
                   _TextInputField(
                     subtext: 'If applicable',
@@ -224,14 +230,27 @@ class _FethrQuestionnaireState extends State<FethrQuestionnaire> {
                   _SingleChoiceSelection(
                     value: _politicalStance,
                     questionText: QUESTIONS[11],
-                    choices: POLITICAL_STANCE,
+                    choices: politicalStanceList,
                     function: (choice) => _politicalStance = choice,
+                    other: (other) {
+                      _ethnicity = other;
+                      setState(() {
+                        politicalStanceList[
+                            politicalStanceList.indexOf('Other')] = other;
+                      });
+                    },
                   ),
                   _SingleChoiceSelection(
                     value: _religiousBelief,
                     questionText: QUESTIONS[12],
-                    choices: RELIGIONS,
+                    choices: religionList,
                     function: (choice) => _religiousBelief = choice,
+                    other: (other) {
+                      _ethnicity = other;
+                      setState(() {
+                        religionList[religionList.indexOf('Other')] = other;
+                      });
+                    },
                   ),
                   _SingleChoiceSelection(
                     value: _meetPreference,
@@ -240,11 +259,16 @@ class _FethrQuestionnaireState extends State<FethrQuestionnaire> {
                     function: (value) => _meetPreference = value,
                   ),
                   _MultiChoiceSelection(
+                    maxItems: 100,
                     values: _venuePreference,
                     questionText: QUESTIONS[14],
-                    choices: VENUES,
+                    subtext: 'Choose as many as you like',
+                    choices: venueList,
                     function: (values) =>
                         _venuePreference = List<String>.from(values),
+                    other: (other) {
+                      _venuePreference = other;
+                    },
                   ),
                   _InstructionScreen(
                     questionController: _questionController,
@@ -380,60 +404,88 @@ class _FethrQuestionnaireState extends State<FethrQuestionnaire> {
                     function: (choice) => _compatibility_u = choice,
                   ),
                   _MultiChoiceSelection(
+                    maxItems: 5,
                     values: _interests,
                     questionText: QUESTIONS[37],
                     subtext: 'You can choose up to 5',
-                    choices: INTERESTS,
+                    choices: interestList,
                     function: (values) =>
                         _interests = List<String>.from(values),
+                    other: (other) {
+                      _interests = other;
+                    },
                   ),
                   _MultiChoiceSelection(
+                    maxItems: 3,
                     values: _activities,
                     questionText: QUESTIONS[38],
                     subtext: 'You can choose up to 3',
-                    choices: ACTIVITIES,
+                    choices: activityList,
                     function: (values) =>
                         _activities = List<String>.from(values),
+                    other: (other) {
+                      _activities = other;
+                    },
                   ),
                   _MultiChoiceSelection(
+                    maxItems: 3,
                     values: _activities2,
                     questionText: QUESTIONS[39],
                     subtext: 'You can choose up to 3',
-                    choices: ACTIVITIES2,
+                    choices: activityList2,
                     function: (values) =>
                         _activities2 = List<String>.from(values),
+                    other: (other) {
+                      _activities2 = other;
+                    },
                   ),
                   _MultiChoiceSelection(
+                    maxItems: 3,
                     values: _conversationTopics,
                     questionText: QUESTIONS[40],
                     subtext: 'You can choose up to 3',
-                    choices: TOPICS,
+                    choices: topicList,
                     function: (values) =>
                         _conversationTopics = List<String>.from(values),
+                    other: (other) {
+                      _conversationTopics = other;
+                    },
                   ),
                   _MultiChoiceSelection(
+                    maxItems: 100,
                     values: _musicGenres,
                     questionText: QUESTIONS[41],
                     subtext: 'Choose as many as you like',
-                    choices: GENRES,
+                    choices: genreList,
                     function: (values) =>
                         _musicGenres = List<String>.from(values),
+                    other: (other) {
+                      _musicGenres = other;
+                    },
                   ),
                   _MultiChoiceSelection(
+                    maxItems: 3,
                     values: _preferredQualities,
                     questionText: QUESTIONS[42],
                     subtext: 'Please choose up to 3',
-                    choices: QUALITIES,
+                    choices: qualitiesList,
                     function: (values) =>
                         _preferredQualities = List<String>.from(values),
+                    other: (other) {
+                      _preferredQualities = other;
+                    },
                   ),
                   _MultiChoiceSelection(
+                    maxItems: 3,
                     values: _selfQualities,
                     questionText: QUESTIONS[43],
                     subtext: 'Please choose up to 3',
-                    choices: QUALITIES,
+                    choices: qualitiesList2,
                     function: (values) =>
                         _selfQualities = List<String>.from(values),
+                    other: (other) {
+                      _selfQualities = other;
+                    },
                   ),
                 ],
               ),
@@ -475,7 +527,8 @@ class _FethrQuestionnaireState extends State<FethrQuestionnaire> {
                           alignment: FractionalOffset.bottomRight,
                           child: FlatButton(
                             onPressed: () {
-                              print(_questionnaire.firstname);
+                              print(_ethnicity);
+                              print(_questionnaire.ethnicity);
                               _questionController.nextPage(
                                 duration: Duration(milliseconds: 500),
                                 curve: Curves.ease,
@@ -520,11 +573,12 @@ class _FethrQuestionnaireState extends State<FethrQuestionnaire> {
                               firebaseFirestore
                                   .collection('users')
                                   .doc(user.id)
-                                  .set(_constructQuestionnaire()).then(
-                                (value) => Navigator.of(context)
-                                    .pushAndRemoveUntil(
-                                        HomePage.route(), (route) => false),
-                              );
+                                  .set(_constructQuestionnaire())
+                                  .then(
+                                    (value) => Navigator.of(context)
+                                        .pushAndRemoveUntil(
+                                            HomePage.route(), (route) => false),
+                                  );
                             },
                             child: Text(
                               'Complete',
@@ -677,16 +731,18 @@ class _SingleChoiceSelection extends StatelessWidget {
   final String questionText;
   final String subtext;
   final Function function;
+  final Function(String) other;
   final String value;
 
-  const _SingleChoiceSelection(
-      {Key key,
-      @required this.questionText,
-      @required this.choices,
-      @required this.function,
-      this.value = '',
-      this.subtext = ''})
-      : super(key: key);
+  const _SingleChoiceSelection({
+    Key key,
+    @required this.questionText,
+    @required this.choices,
+    @required this.function,
+    this.other,
+    this.value = '',
+    this.subtext = '',
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -724,6 +780,8 @@ class _SingleChoiceSelection extends StatelessWidget {
                     ],
                   ),
             CustomRadioButton(
+              otherValue: other,
+              radioButtonValue: function,
               defaultSelected: value,
               elevation: 0,
               absoluteZeroSpacing: false,
@@ -734,7 +792,6 @@ class _SingleChoiceSelection extends StatelessWidget {
                   selectedColor: Colors.white,
                   unSelectedColor: Colors.black,
                   textStyle: TextStyle(fontSize: 16)),
-              radioButtonValue: function,
               customShape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(12),
                 side: BorderSide(color: Colors.black),
@@ -755,13 +812,17 @@ class _MultiChoiceSelection extends StatelessWidget {
   final String questionText;
   final String subtext;
   final Function function;
+  final Function(List<String>) other;
   final List<String> values;
+  final int maxItems;
 
   const _MultiChoiceSelection({
     Key key,
     @required this.questionText,
     @required this.choices,
     @required this.function,
+    @required this.maxItems,
+    this.other,
     this.subtext = '',
     this.values,
   }) : super(key: key);
@@ -803,6 +864,7 @@ class _MultiChoiceSelection extends StatelessWidget {
               child: CustomCheckBoxGroup(
                 defaultSelected: values,
                 elevation: 0,
+                maxChecked: maxItems,
                 absoluteZeroSpacing: false,
                 unSelectedColor: Theme.of(context).canvasColor,
                 buttonLables: choices,
@@ -812,6 +874,7 @@ class _MultiChoiceSelection extends StatelessWidget {
                     unSelectedColor: Colors.black,
                     textStyle: TextStyle(fontSize: 16)),
                 checkBoxButtonValues: function,
+                otherValues: other,
                 customShape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(12),
                   side: BorderSide(color: Colors.black),
