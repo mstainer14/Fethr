@@ -23,7 +23,7 @@ const AGE_RANGES = [
   '45-54',
   '55-64',
   '65+',
-  'Prefer not to say'
+  'Prefer not to say',
 ];
 
 const List<String> ORIENTATIONS = [
@@ -31,7 +31,7 @@ const List<String> ORIENTATIONS = [
   'Gay Man',
   'Gay Woman / Lesbian',
   'Heterosexual / Straight',
-  'Prefer not to say'
+  'Prefer not to say',
 ];
 
 List<String> ethnicityList = [
@@ -50,7 +50,7 @@ List<String> politicalStanceList = [
   'Moderate',
   'Conservative',
   'Prefer not to say',
-  'Other'
+  'Other',
 ];
 
 List<String> religionList = [
@@ -62,7 +62,7 @@ List<String> religionList = [
   'Spiritual',
   'Athiest',
   'Prefer not to say',
-  'Other'
+  'Other',
 ];
 
 const List<String> MEET_PREFERENCES = [
@@ -78,7 +78,7 @@ List<String> venueList = [
   'Coffee Shop',
   'Art Gallery / Museum',
   'Don\'t Mind',
-  'Other'
+  'Other',
 ];
 
 const List<String> NUMBER_SCALE = [
@@ -187,7 +187,7 @@ const List<String> GENDERS = [
   'Prefer not to say',
 ];
 
-const List<String> qualitiesList = [
+List<String> qualitiesList = [
   'Funny',
   'Intelligent',
   'Empathetic',
@@ -201,7 +201,7 @@ const List<String> qualitiesList = [
   'Other',
 ];
 
-const List<String> qualitiesList2 = [
+List<String> qualitiesList2 = [
   'Funny',
   'Intelligent',
   'Empathetic',

@@ -21,6 +21,8 @@ class SignUpForm extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
+            Image.asset('assets/logo.png'),
+            const SizedBox(height: 16.0),
             _EmailInput(),
             const SizedBox(height: 8.0),
             _PasswordInput(),
@@ -115,11 +117,11 @@ class _SignUpButton extends StatelessWidget {
             ? const CircularProgressIndicator()
             : RaisedButton(
                 key: const Key('signUpForm_continue_raisedButton'),
-                child: const Text('SIGN UP'),
+                child: const Text('SIGN UP', style: TextStyle(color: Colors.white),),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(30.0),
                 ),
-                color: Colors.orangeAccent,
+                color: Colors.black,
                 onPressed: state.status.isValidated
                     ? () => context.read<SignUpCubit>().signUpFormSubmitted()
                     : null,

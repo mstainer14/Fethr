@@ -136,463 +136,465 @@ class _FethrQuestionnaireState extends State<FethrQuestionnaire> {
     final user = context.select((AuthenticationBloc bloc) => bloc.state.user);
     final size = MediaQuery.of(context).size;
     return Scaffold(
-      resizeToAvoidBottomPadding: false,
+      resizeToAvoidBottomPadding: true,
       backgroundColor: Colors.white,
-      body: Background(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Container(
-              height: size.height * 0.90,
-              child: PageView(
-                physics: ClampingScrollPhysics(),
-                controller: _questionController,
-                onPageChanged: (int page) {
-                  setState(() {
-                    _currentPage = page;
-                  });
-                },
-                children: [
-                  _InstructionScreen(
-                      questionController: _questionController,
-                      title: WELCOME,
-                      subtitle: 'Takes 5 min',
-                      buttonText: 'Start'),
-                  _TextInputField(
-                    controller: _nameController,
-                    labelText: 'Name',
-                    questionText: QUESTIONS[0],
-                  ),
-                  _TextInputField(
-                    controller: _surnameController,
-                    labelText: 'Surname',
-                    questionText: QUESTIONS[1],
-                  ),
-                  _TextInputField(
-                    subtext: 'The one you used to sign up with',
-                    controller: _emailController,
-                    labelText: 'Email address',
-                    questionText: QUESTIONS[2],
-                  ),
-                  _InstructionScreen(
-                    questionController: _questionController,
-                    buttonText: 'Continue',
-                    title: QUESTIONS[3],
-                  ),
-                  _SingleChoiceSelection(
-                    value: _gender,
-                    questionText: QUESTIONS[4],
-                    choices: GENDERS,
-                    function: (choice) => _gender = choice,
-                  ),
-                  _SingleChoiceSelection(
-                    value: _ageRange,
-                    questionText: QUESTIONS[5],
-                    choices: AGE_RANGES,
-                    function: (choice) => _ageRange = choice,
-                  ),
-                  _SingleChoiceSelection(
-                    value: _sexualOrientation,
-                    questionText: QUESTIONS[6],
-                    choices: ORIENTATIONS,
-                    function: (choice) => _sexualOrientation = choice,
-                  ),
-                  _SingleChoiceSelection(
-                    value: _ethnicity,
-                    questionText: QUESTIONS[7],
-                    choices: ethnicityList,
-                    function: (choice) => _ethnicity = choice,
-                    other: (other) {
-                      _ethnicity = other;
-                      setState(() {
-                        ethnicityList[ethnicityList.indexOf('Other')] = other;
-                      });
-                    },
-                  ),
-                  _TextInputField(
-                    subtext: 'If applicable',
-                    controller: _universityController,
-                    labelText: 'University',
-                    questionText: QUESTIONS[8],
-                  ),
-                  _TextInputField(
-                    subtext: 'Optional',
-                    controller: _occupationController,
-                    labelText: 'Occupation',
-                    questionText: QUESTIONS[9],
-                  ),
-                  _TextInputField(
-                    controller: _cityController,
-                    labelText: 'City',
-                    questionText: QUESTIONS[10],
-                  ),
-                  _SingleChoiceSelection(
-                    value: _politicalStance,
-                    questionText: QUESTIONS[11],
-                    choices: politicalStanceList,
-                    function: (choice) => _politicalStance = choice,
-                    other: (other) {
-                      _ethnicity = other;
-                      setState(() {
-                        politicalStanceList[
-                            politicalStanceList.indexOf('Other')] = other;
-                      });
-                    },
-                  ),
-                  _SingleChoiceSelection(
-                    value: _religiousBelief,
-                    questionText: QUESTIONS[12],
-                    choices: religionList,
-                    function: (choice) => _religiousBelief = choice,
-                    other: (other) {
-                      _ethnicity = other;
-                      setState(() {
-                        religionList[religionList.indexOf('Other')] = other;
-                      });
-                    },
-                  ),
-                  _SingleChoiceSelection(
-                    value: _meetPreference,
-                    questionText: QUESTIONS[13],
-                    choices: MEET_PREFERENCES,
-                    function: (value) => _meetPreference = value,
-                  ),
-                  _MultiChoiceSelection(
-                    maxItems: 100,
-                    values: _venuePreference,
-                    questionText: QUESTIONS[14],
-                    subtext: 'Choose as many as you like',
-                    choices: venueList,
-                    function: (values) =>
-                        _venuePreference = List<String>.from(values),
-                    other: (other) {
-                      _venuePreference = other;
-                    },
-                  ),
-                  _InstructionScreen(
-                    questionController: _questionController,
-                    title: QUESTIONS[15],
-                    subtitle:
-                        'The following questions will be used in determining your compatibility',
-                    buttonText: 'Continue',
-                  ),
-                  _AgreeScale(
-                    value: _compatibility_a,
-                    questionText: QUESTIONS[16],
-                    choices: NUMBER_SCALE,
-                    function: (choice) => _compatibility_a = choice,
-                  ),
-                  _AgreeScale(
-                    value: _compatibility_b,
-                    questionText: QUESTIONS[17],
-                    choices: NUMBER_SCALE,
-                    function: (choice) => _compatibility_b = choice,
-                  ),
-                  _AgreeScale(
-                    value: _compatibility_c,
-                    questionText: QUESTIONS[18],
-                    choices: NUMBER_SCALE,
-                    function: (choice) => _compatibility_c = choice,
-                  ),
-                  _AgreeScale(
-                    value: _compatibility_d,
-                    questionText: QUESTIONS[19],
-                    choices: NUMBER_SCALE,
-                    function: (choice) => _compatibility_d = choice,
-                  ),
-                  _AgreeScale(
-                    value: _compatibility_e,
-                    questionText: QUESTIONS[20],
-                    choices: NUMBER_SCALE,
-                    function: (choice) => _compatibility_e = choice,
-                  ),
-                  _AgreeScale(
-                    value: _compatibility_f,
-                    questionText: QUESTIONS[21],
-                    choices: NUMBER_SCALE,
-                    function: (choice) => _compatibility_f = choice,
-                  ),
-                  _AgreeScale(
-                    value: _compatibility_g,
-                    questionText: QUESTIONS[22],
-                    choices: NUMBER_SCALE,
-                    function: (choice) => _compatibility_g = choice,
-                  ),
-                  _AgreeScale(
-                    value: _compatibility_h,
-                    questionText: QUESTIONS[23],
-                    choices: NUMBER_SCALE,
-                    function: (choice) => _compatibility_h = choice,
-                  ),
-                  _AgreeScale(
-                    value: _compatibility_i,
-                    questionText: QUESTIONS[24],
-                    choices: NUMBER_SCALE,
-                    function: (choice) => _compatibility_i = choice,
-                  ),
-                  _AgreeScale(
-                    value: _compatibility_j,
-                    questionText: QUESTIONS[25],
-                    choices: NUMBER_SCALE,
-                    function: (choice) => _compatibility_j = choice,
-                  ),
-                  _AgreeScale(
-                    value: _compatibility_k,
-                    questionText: QUESTIONS[26],
-                    choices: NUMBER_SCALE,
-                    function: (choice) => _compatibility_k = choice,
-                  ),
-                  _AgreeScale(
-                    value: _compatibility_l,
-                    questionText: QUESTIONS[27],
-                    choices: NUMBER_SCALE,
-                    function: (choice) => _compatibility_l = choice,
-                  ),
-                  _AgreeScale(
-                    value: _compatibility_m,
-                    questionText: QUESTIONS[28],
-                    choices: NUMBER_SCALE,
-                    function: (choice) => _compatibility_m = choice,
-                  ),
-                  _AgreeScale(
-                    value: _compatibility_n,
-                    questionText: QUESTIONS[29],
-                    choices: NUMBER_SCALE,
-                    function: (choice) => _compatibility_n = choice,
-                  ),
-                  _AgreeScale(
-                    value: _compatibility_o,
-                    questionText: QUESTIONS[30],
-                    choices: NUMBER_SCALE,
-                    function: (choice) => _compatibility_o = choice,
-                  ),
-                  _AgreeScale(
-                    value: _compatibility_p,
-                    questionText: QUESTIONS[31],
-                    choices: NUMBER_SCALE,
-                    function: (choice) => _compatibility_p = choice,
-                  ),
-                  _AgreeScale(
-                    value: _compatibility_q,
-                    questionText: QUESTIONS[32],
-                    choices: NUMBER_SCALE,
-                    function: (choice) => _compatibility_q = choice,
-                  ),
-                  _AgreeScale(
-                    value: _compatibility_r,
-                    questionText: QUESTIONS[33],
-                    choices: NUMBER_SCALE,
-                    function: (choice) => _compatibility_r = choice,
-                  ),
-                  _AgreeScale(
-                    value: _compatibility_s,
-                    questionText: QUESTIONS[34],
-                    choices: NUMBER_SCALE,
-                    function: (choice) => _compatibility_s = choice,
-                  ),
-                  _AgreeScale(
-                    value: _compatibility_t,
-                    questionText: QUESTIONS[35],
-                    choices: NUMBER_SCALE,
-                    function: (choice) => _compatibility_t = choice,
-                  ),
-                  _AgreeScale(
-                    value: _compatibility_u,
-                    questionText: QUESTIONS[36],
-                    choices: NUMBER_SCALE,
-                    function: (choice) => _compatibility_u = choice,
-                  ),
-                  _MultiChoiceSelection(
-                    maxItems: 5,
-                    values: _interests,
-                    questionText: QUESTIONS[37],
-                    subtext: 'You can choose up to 5',
-                    choices: interestList,
-                    function: (values) =>
-                        _interests = List<String>.from(values),
-                    other: (other) {
-                      _interests = other;
-                    },
-                  ),
-                  _MultiChoiceSelection(
-                    maxItems: 3,
-                    values: _activities,
-                    questionText: QUESTIONS[38],
-                    subtext: 'You can choose up to 3',
-                    choices: activityList,
-                    function: (values) =>
-                        _activities = List<String>.from(values),
-                    other: (other) {
-                      _activities = other;
-                    },
-                  ),
-                  _MultiChoiceSelection(
-                    maxItems: 3,
-                    values: _activities2,
-                    questionText: QUESTIONS[39],
-                    subtext: 'You can choose up to 3',
-                    choices: activityList2,
-                    function: (values) =>
-                        _activities2 = List<String>.from(values),
-                    other: (other) {
-                      _activities2 = other;
-                    },
-                  ),
-                  _MultiChoiceSelection(
-                    maxItems: 3,
-                    values: _conversationTopics,
-                    questionText: QUESTIONS[40],
-                    subtext: 'You can choose up to 3',
-                    choices: topicList,
-                    function: (values) =>
-                        _conversationTopics = List<String>.from(values),
-                    other: (other) {
-                      _conversationTopics = other;
-                    },
-                  ),
-                  _MultiChoiceSelection(
-                    maxItems: 100,
-                    values: _musicGenres,
-                    questionText: QUESTIONS[41],
-                    subtext: 'Choose as many as you like',
-                    choices: genreList,
-                    function: (values) =>
-                        _musicGenres = List<String>.from(values),
-                    other: (other) {
-                      _musicGenres = other;
-                    },
-                  ),
-                  _MultiChoiceSelection(
-                    maxItems: 3,
-                    values: _preferredQualities,
-                    questionText: QUESTIONS[42],
-                    subtext: 'Please choose up to 3',
-                    choices: qualitiesList,
-                    function: (values) =>
-                        _preferredQualities = List<String>.from(values),
-                    other: (other) {
-                      _preferredQualities = other;
-                    },
-                  ),
-                  _MultiChoiceSelection(
-                    maxItems: 3,
-                    values: _selfQualities,
-                    questionText: QUESTIONS[43],
-                    subtext: 'Please choose up to 3',
-                    choices: qualitiesList2,
-                    function: (values) =>
-                        _selfQualities = List<String>.from(values),
-                    other: (other) {
-                      _selfQualities = other;
-                    },
-                  ),
-                ],
-              ),
-            ),
-            Center(
-                child: Text(
-              _currentPage != 0
-                  ? '${(((_currentPage - 1) / _numPages) * 100).floor()}% Complete'
-                  : '',
-              style: TextStyle(
-                color: Colors.black,
-                fontWeight: FontWeight.bold,
-              ),
-            )),
-            Expanded(
-              child: _currentPage != _numPages
-                  ? Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Align(
-                          alignment: FractionalOffset.bottomLeft,
-                          child: FlatButton(
-                            onPressed: () {
-                              _questionController.previousPage(
-                                duration: Duration(milliseconds: 500),
-                                curve: Curves.ease,
-                              );
-                            },
-                            child: Text(
-                              'Previous',
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ),
-                        ),
-                        Align(
-                          alignment: FractionalOffset.bottomRight,
-                          child: FlatButton(
-                            onPressed: () {
-                              print(_ethnicity);
-                              print(_questionnaire.ethnicity);
-                              _questionController.nextPage(
-                                duration: Duration(milliseconds: 500),
-                                curve: Curves.ease,
-                              );
-                            },
-                            child: Text(
-                              'Next',
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    )
-                  : Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Align(
-                          alignment: FractionalOffset.bottomLeft,
-                          child: FlatButton(
-                            onPressed: () {
-                              _questionController.previousPage(
-                                duration: Duration(milliseconds: 500),
-                                curve: Curves.ease,
-                              );
-                            },
-                            child: Text(
-                              'Previous',
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ),
-                        ),
-                        Align(
-                          alignment: FractionalOffset.bottomRight,
-                          child: FlatButton(
-                            onPressed: () async {
-                              firebaseFirestore
-                                  .collection('users')
-                                  .doc(user.id)
-                                  .set(_constructQuestionnaire())
-                                  .then(
-                                    (value) => Navigator.of(context)
-                                        .pushAndRemoveUntil(
-                                            HomePage.route(), (route) => false),
-                                  );
-                            },
-                            child: Text(
-                              'Complete',
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
+      body: SingleChildScrollView(
+        child: Background(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Container(
+                height: size.height * 0.90,
+                child: PageView(
+                  physics: ClampingScrollPhysics(),
+                  controller: _questionController,
+                  onPageChanged: (int page) {
+                    setState(() {
+                      _currentPage = page;
+                    });
+                  },
+                  children: [
+                    _InstructionScreen(
+                        questionController: _questionController,
+                        title: WELCOME,
+                        subtitle: 'Takes 5 min',
+                        buttonText: 'Start'),
+                    _TextInputField(
+                      controller: _nameController,
+                      labelText: 'Name',
+                      questionText: QUESTIONS[0],
                     ),
-            ),
-          ],
+                    _TextInputField(
+                      controller: _surnameController,
+                      labelText: 'Surname',
+                      questionText: QUESTIONS[1],
+                    ),
+                    _TextInputField(
+                      subtext: 'The one you used to sign up with',
+                      controller: _emailController,
+                      labelText: 'Email address',
+                      questionText: QUESTIONS[2],
+                    ),
+                    _InstructionScreen(
+                      questionController: _questionController,
+                      buttonText: 'Continue',
+                      title: QUESTIONS[3],
+                    ),
+                    _SingleChoiceSelection(
+                      value: _gender,
+                      questionText: QUESTIONS[4],
+                      choices: GENDERS,
+                      function: (choice) => _gender = choice,
+                    ),
+                    _SingleChoiceSelection(
+                      value: _ageRange,
+                      questionText: QUESTIONS[5],
+                      choices: AGE_RANGES,
+                      function: (choice) => _ageRange = choice,
+                    ),
+                    _SingleChoiceSelection(
+                      value: _sexualOrientation,
+                      questionText: QUESTIONS[6],
+                      choices: ORIENTATIONS,
+                      function: (choice) => _sexualOrientation = choice,
+                    ),
+                    _SingleChoiceSelection(
+                      value: _ethnicity,
+                      questionText: QUESTIONS[7],
+                      choices: ethnicityList,
+                      function: (choice) => _ethnicity = choice,
+                      other: (other) {
+                        _ethnicity = other;
+                        setState(() {
+                          ethnicityList.last = other;
+                        });
+                      },
+                    ),
+                    _TextInputField(
+                      subtext: 'If applicable',
+                      controller: _universityController,
+                      labelText: 'University',
+                      questionText: QUESTIONS[8],
+                    ),
+                    _TextInputField(
+                      subtext: 'Optional',
+                      controller: _occupationController,
+                      labelText: 'Occupation',
+                      questionText: QUESTIONS[9],
+                    ),
+                    _TextInputField(
+                      controller: _cityController,
+                      labelText: 'City',
+                      questionText: QUESTIONS[10],
+                    ),
+                    _SingleChoiceSelection(
+                      value: _politicalStance,
+                      questionText: QUESTIONS[11],
+                      choices: politicalStanceList,
+                      function: (choice) => _politicalStance = choice,
+                      other: (other) {
+                        _politicalStance = other;
+                        setState(() {
+                          politicalStanceList.last = other;
+                        });
+                      },
+                    ),
+                    _SingleChoiceSelection(
+                      value: _religiousBelief,
+                      questionText: QUESTIONS[12],
+                      choices: religionList,
+                      function: (choice) => _religiousBelief = choice,
+                      other: (other) {
+                        _religiousBelief = other;
+                        setState(() {
+                          religionList.last = other;
+                        });
+                      },
+                    ),
+                    _SingleChoiceSelection(
+                      value: _meetPreference,
+                      questionText: QUESTIONS[13],
+                      choices: MEET_PREFERENCES,
+                      function: (value) => _meetPreference = value,
+                    ),
+                    _MultiChoiceSelection(
+                      maxItems: 100,
+                      values: _venuePreference,
+                      questionText: QUESTIONS[14],
+                      subtext: 'Choose as many as you like',
+                      choices: venueList,
+                      function: (values) =>
+                          _venuePreference = List<String>.from(values),
+                      other: (other) {
+                        _venuePreference = other;
+                      },
+                    ),
+                    _InstructionScreen(
+                      questionController: _questionController,
+                      title: QUESTIONS[15],
+                      subtitle:
+                          'The following questions will be used in determining your compatibility',
+                      buttonText: 'Continue',
+                    ),
+                    _AgreeScale(
+                      value: _compatibility_a,
+                      questionText: QUESTIONS[16],
+                      choices: NUMBER_SCALE,
+                      function: (choice) => _compatibility_a = choice,
+                    ),
+                    _AgreeScale(
+                      value: _compatibility_b,
+                      questionText: QUESTIONS[17],
+                      choices: NUMBER_SCALE,
+                      function: (choice) => _compatibility_b = choice,
+                    ),
+                    _AgreeScale(
+                      value: _compatibility_c,
+                      questionText: QUESTIONS[18],
+                      choices: NUMBER_SCALE,
+                      function: (choice) => _compatibility_c = choice,
+                    ),
+                    _AgreeScale(
+                      value: _compatibility_d,
+                      questionText: QUESTIONS[19],
+                      choices: NUMBER_SCALE,
+                      function: (choice) => _compatibility_d = choice,
+                    ),
+                    _AgreeScale(
+                      value: _compatibility_e,
+                      questionText: QUESTIONS[20],
+                      choices: NUMBER_SCALE,
+                      function: (choice) => _compatibility_e = choice,
+                    ),
+                    _AgreeScale(
+                      value: _compatibility_f,
+                      questionText: QUESTIONS[21],
+                      choices: NUMBER_SCALE,
+                      function: (choice) => _compatibility_f = choice,
+                    ),
+                    _AgreeScale(
+                      value: _compatibility_g,
+                      questionText: QUESTIONS[22],
+                      choices: NUMBER_SCALE,
+                      function: (choice) => _compatibility_g = choice,
+                    ),
+                    _AgreeScale(
+                      value: _compatibility_h,
+                      questionText: QUESTIONS[23],
+                      choices: NUMBER_SCALE,
+                      function: (choice) => _compatibility_h = choice,
+                    ),
+                    _AgreeScale(
+                      value: _compatibility_i,
+                      questionText: QUESTIONS[24],
+                      choices: NUMBER_SCALE,
+                      function: (choice) => _compatibility_i = choice,
+                    ),
+                    _AgreeScale(
+                      value: _compatibility_j,
+                      questionText: QUESTIONS[25],
+                      choices: NUMBER_SCALE,
+                      function: (choice) => _compatibility_j = choice,
+                    ),
+                    _AgreeScale(
+                      value: _compatibility_k,
+                      questionText: QUESTIONS[26],
+                      choices: NUMBER_SCALE,
+                      function: (choice) => _compatibility_k = choice,
+                    ),
+                    _AgreeScale(
+                      value: _compatibility_l,
+                      questionText: QUESTIONS[27],
+                      choices: NUMBER_SCALE,
+                      function: (choice) => _compatibility_l = choice,
+                    ),
+                    _AgreeScale(
+                      value: _compatibility_m,
+                      questionText: QUESTIONS[28],
+                      choices: NUMBER_SCALE,
+                      function: (choice) => _compatibility_m = choice,
+                    ),
+                    _AgreeScale(
+                      value: _compatibility_n,
+                      questionText: QUESTIONS[29],
+                      choices: NUMBER_SCALE,
+                      function: (choice) => _compatibility_n = choice,
+                    ),
+                    _AgreeScale(
+                      value: _compatibility_o,
+                      questionText: QUESTIONS[30],
+                      choices: NUMBER_SCALE,
+                      function: (choice) => _compatibility_o = choice,
+                    ),
+                    _AgreeScale(
+                      value: _compatibility_p,
+                      questionText: QUESTIONS[31],
+                      choices: NUMBER_SCALE,
+                      function: (choice) => _compatibility_p = choice,
+                    ),
+                    _AgreeScale(
+                      value: _compatibility_q,
+                      questionText: QUESTIONS[32],
+                      choices: NUMBER_SCALE,
+                      function: (choice) => _compatibility_q = choice,
+                    ),
+                    _AgreeScale(
+                      value: _compatibility_r,
+                      questionText: QUESTIONS[33],
+                      choices: NUMBER_SCALE,
+                      function: (choice) => _compatibility_r = choice,
+                    ),
+                    _AgreeScale(
+                      value: _compatibility_s,
+                      questionText: QUESTIONS[34],
+                      choices: NUMBER_SCALE,
+                      function: (choice) => _compatibility_s = choice,
+                    ),
+                    _AgreeScale(
+                      value: _compatibility_t,
+                      questionText: QUESTIONS[35],
+                      choices: NUMBER_SCALE,
+                      function: (choice) => _compatibility_t = choice,
+                    ),
+                    _AgreeScale(
+                      value: _compatibility_u,
+                      questionText: QUESTIONS[36],
+                      choices: NUMBER_SCALE,
+                      function: (choice) => _compatibility_u = choice,
+                    ),
+                    _MultiChoiceSelection(
+                      maxItems: 5,
+                      values: _interests,
+                      questionText: QUESTIONS[37],
+                      subtext: 'You can choose up to 5',
+                      choices: interestList,
+                      function: (values) =>
+                          _interests = List<String>.from(values),
+                      other: (other) {
+                        _interests = other;
+                      },
+                    ),
+                    _MultiChoiceSelection(
+                      maxItems: 3,
+                      values: _activities,
+                      questionText: QUESTIONS[38],
+                      subtext: 'You can choose up to 3',
+                      choices: activityList,
+                      function: (values) =>
+                          _activities = List<String>.from(values),
+                      other: (other) {
+                        _activities = other;
+                      },
+                    ),
+                    _MultiChoiceSelection(
+                      maxItems: 3,
+                      values: _activities2,
+                      questionText: QUESTIONS[39],
+                      subtext: 'You can choose up to 3',
+                      choices: activityList2,
+                      function: (values) =>
+                          _activities2 = List<String>.from(values),
+                      other: (other) {
+                        _activities2 = other;
+                      },
+                    ),
+                    _MultiChoiceSelection(
+                      maxItems: 3,
+                      values: _conversationTopics,
+                      questionText: QUESTIONS[40],
+                      subtext: 'You can choose up to 3',
+                      choices: topicList,
+                      function: (values) =>
+                          _conversationTopics = List<String>.from(values),
+                      other: (other) {
+                        _conversationTopics = other;
+                      },
+                    ),
+                    _MultiChoiceSelection(
+                      maxItems: 100,
+                      values: _musicGenres,
+                      questionText: QUESTIONS[41],
+                      subtext: 'Choose as many as you like',
+                      choices: genreList,
+                      function: (values) =>
+                          _musicGenres = List<String>.from(values),
+                      other: (other) {
+                        _musicGenres = other;
+                      },
+                    ),
+                    _MultiChoiceSelection(
+                      maxItems: 3,
+                      values: _preferredQualities,
+                      questionText: QUESTIONS[42],
+                      subtext: 'Please choose up to 3',
+                      choices: qualitiesList,
+                      function: (values) =>
+                          _preferredQualities = List<String>.from(values),
+                      other: (other) {
+                        _preferredQualities = other;
+                      },
+                    ),
+                    _MultiChoiceSelection(
+                      maxItems: 3,
+                      values: _selfQualities,
+                      questionText: QUESTIONS[43],
+                      subtext: 'Please choose up to 3',
+                      choices: qualitiesList2,
+                      function: (values) =>
+                          _selfQualities = List<String>.from(values),
+                      other: (other) {
+                        _selfQualities = other;
+                      },
+                    ),
+                  ],
+                ),
+              ),
+              Center(
+                child: Text(
+                  _currentPage != 0
+                      ? '${(((_currentPage - 1) / _numPages) * 100).floor()}% Complete'
+                      : '',
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+              Expanded(
+                child: _currentPage != _numPages
+                    ? Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Align(
+                            alignment: FractionalOffset.bottomLeft,
+                            child: FlatButton(
+                              onPressed: () {
+                                _questionController.previousPage(
+                                  duration: Duration(milliseconds: 500),
+                                  curve: Curves.ease,
+                                );
+                              },
+                              child: Text(
+                                'Previous',
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                          ),
+                          Align(
+                            alignment: FractionalOffset.bottomRight,
+                            child: FlatButton(
+                              onPressed: () {
+                                print(_ethnicity);
+                                print(_questionnaire.ethnicity);
+                                _questionController.nextPage(
+                                  duration: Duration(milliseconds: 500),
+                                  curve: Curves.ease,
+                                );
+                              },
+                              child: Text(
+                                'Next',
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      )
+                    : Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Align(
+                            alignment: FractionalOffset.bottomLeft,
+                            child: FlatButton(
+                              onPressed: () {
+                                _questionController.previousPage(
+                                  duration: Duration(milliseconds: 500),
+                                  curve: Curves.ease,
+                                );
+                              },
+                              child: Text(
+                                'Previous',
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                          ),
+                          Align(
+                            alignment: FractionalOffset.bottomRight,
+                            child: FlatButton(
+                              onPressed: () async {
+                                firebaseFirestore
+                                    .collection('users')
+                                    .doc(user.id)
+                                    .set(_constructQuestionnaire())
+                                    .then(
+                                      (value) => Navigator.of(context)
+                                          .pushAndRemoveUntil(HomePage.route(),
+                                              (route) => false),
+                                    );
+                              },
+                              child: Text(
+                                'Complete',
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -714,6 +716,7 @@ class _TextInputField extends StatelessWidget {
               key: Key('onboard_${labelText}_textField'),
               keyboardType: TextInputType.name,
               style: TextStyle(color: Colors.black),
+              onSubmitted: (text) {},
               decoration: InputDecoration(
                 labelText: labelText,
                 helperText: '',
@@ -746,16 +749,19 @@ class _SingleChoiceSelection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return Padding(
       padding: const EdgeInsets.all(10.0),
       child: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            // Center(
-            //   child: Image.asset('assets/logo.png'),
-            // ),
-            SizedBox(height: 20.0),
+            SizedBox(height: 40.0),
+            Center(
+              child: Image.asset('assets/logo.png'),
+            ),
+            SizedBox(height: 10.0),
             subtext == ''
                 ? Text(
                     questionText,
@@ -779,26 +785,29 @@ class _SingleChoiceSelection extends StatelessWidget {
                       ),
                     ],
                   ),
-            CustomRadioButton(
-              otherValue: other,
-              radioButtonValue: function,
-              defaultSelected: value,
-              elevation: 0,
-              absoluteZeroSpacing: false,
-              unSelectedColor: Theme.of(context).canvasColor,
-              buttonLables: choices,
-              buttonValues: choices,
-              buttonTextStyle: ButtonTextStyle(
-                  selectedColor: Colors.white,
-                  unSelectedColor: Colors.black,
-                  textStyle: TextStyle(fontSize: 16)),
-              customShape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12),
-                side: BorderSide(color: Colors.black),
+            Expanded(
+              child: CustomRadioButton(
+                
+                otherValue: other,
+                radioButtonValue: function,
+                defaultSelected: value,
+                elevation: 0,
+                absoluteZeroSpacing: false,
+                unSelectedColor: Theme.of(context).canvasColor,
+                buttonLables: choices,
+                buttonValues: choices,
+                buttonTextStyle: ButtonTextStyle(
+                    selectedColor: Colors.white,
+                    unSelectedColor: Colors.black,
+                    textStyle: TextStyle(fontSize: 16)),
+                customShape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                  side: BorderSide(color: Colors.black),
+                ),
+                selectedColor: Theme.of(context).accentColor,
+                horizontal: true,
+                enableShape: true,
               ),
-              selectedColor: Theme.of(context).accentColor,
-              horizontal: true,
-              enableShape: true,
             ),
           ],
         ),
@@ -835,7 +844,11 @@ class _MultiChoiceSelection extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            SizedBox(height: 20.0),
+            SizedBox(height: 40.0),
+            Center(
+              child: Image.asset('assets/logo.png'),
+            ),
+            SizedBox(height: 10.0),
             subtext == ''
                 ? Text(
                     questionText,
